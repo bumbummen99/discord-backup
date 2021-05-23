@@ -207,6 +207,11 @@ export async function loadChannel(
                             .reverse();
                         messages = messages.slice(messages.length - options.maxMessagesPerChannel);
                         for (const msg of messages) {
+                            /* Skip empty messages */
+                            if (msg.content.length || msg.files.length || msg.embeds.length) {
+                                continue;
+                            }
+                            
                             const sentMsg = await webhook
                                 .send(msg.content, {
                                     username: msg.username,
