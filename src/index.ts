@@ -22,7 +22,7 @@ if (!existsSync(backups)) {
 /**
  * Checks if a backup exists and returns its data
  */
-const getBackupData = async (backupID: string) => {
+const getBackupData = (backupID: string) => {
     return new Promise<BackupData>(async (resolve, reject) => {
         const files = await readdirAsync(backups); // Read "backups" directory
         // Try to get the json file
@@ -43,7 +43,7 @@ const getBackupData = async (backupID: string) => {
  * Fetches a backyp and returns the information about it
  */
 export const fetch = (backupID: string) => {
-    return new Promise<BackupInfos>(async (resolve, reject) => {
+    return new Promise<BackupInfos>((resolve, reject) => {
         getBackupData(backupID)
             .then((backupData) => {
                 const size = statSync(`${backups}${sep}${backupID}.json`).size; // Gets the size of the file using fs
@@ -64,7 +64,7 @@ export const fetch = (backupID: string) => {
 /**
  * Creates a new backup and saves it to the storage
  */
-export const create = async (
+export const create = (
     guild: Guild,
     options: CreateOptions = {
         backupID: null,
@@ -155,7 +155,7 @@ export const create = async (
 /**
  * Loads a backup for a guild
  */
-export const load = async (
+export const load = (
     backup: string | BackupData,
     guild: Guild,
     options: LoadOptions = {
@@ -204,7 +204,7 @@ export const load = async (
 /**
  * Removes a backup
  */
-export const remove = async (backupID: string) => {
+export const remove = (backupID: string) => {
     return new Promise<void>((resolve, reject) => {
         try {
             require(`${backups}${sep}${backupID}.json`);
