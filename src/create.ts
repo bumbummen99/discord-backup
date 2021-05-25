@@ -82,7 +82,7 @@ export async function getEmojis(guild: Guild, options: CreateOptions) {
  * @param {CreateOptions} options The backup options
  * @returns {ChannelData[]} The channels of the guild
  */
-export async function getChannels(guild: Guild, options: CreateOptions) {
+export function getChannels(guild: Guild, options: CreateOptions) {
     return new Promise<ChannelsData>(async (resolve) => {
         const channels: ChannelsData = {
             categories: [],
