@@ -45,7 +45,7 @@ export function fetchChannelPermissions(channel: TextChannel | VoiceChannel | Ca
 /**
  * Fetches the voice channel data that is necessary for the backup
  */
-export async function fetchVoiceChannelData(channel: VoiceChannel) {
+export function fetchVoiceChannelData(channel: VoiceChannel) {
     return new Promise<VoiceChannelData>(async (resolve) => {
         const channelData: VoiceChannelData = {
             type: 'voice',
@@ -63,7 +63,7 @@ export async function fetchVoiceChannelData(channel: VoiceChannel) {
 /**
  * Fetches the text channel data that is necessary for the backup
  */
-export async function fetchTextChannelData(channel: TextChannel | NewsChannel, options: CreateOptions) {
+export function fetchTextChannelData(channel: TextChannel | NewsChannel, options: CreateOptions) {
     return new Promise<TextChannelData>(async (resolve) => {
         const channelData: TextChannelData = {
             type: 'text',
@@ -129,7 +129,7 @@ export async function fetchTextChannelData(channel: TextChannel | NewsChannel, o
 /**
  * Creates a category for the guild
  */
-export async function loadCategory(categoryData: CategoryData, guild: Guild) {
+export function loadCategory(categoryData: CategoryData, guild: Guild) {
     return new Promise<CategoryChannel>((resolve) => {
         guild.channels.create(categoryData.name, { type: 'category' }).then(async (category) => {
             // When the category is created
@@ -153,7 +153,7 @@ export async function loadCategory(categoryData: CategoryData, guild: Guild) {
 /**
  * Create a channel and returns it
  */
-export async function loadChannel(
+export function loadChannel(
     channelData: TextChannelData | VoiceChannelData,
     guild: Guild,
     category?: CategoryChannel,
